@@ -31,11 +31,11 @@ function NewMoviePage({ changesDiscarded, getMovies }) {
         genre: checked
           ? [...prevFormData.genre, value] // Add to genre array
           : prevFormData.genre.filter((genre) => genre !== value), // Remove from genre array
-      }));
+      })); // this logic is simple than the one in the EditPage.jsx
     } else {
       setFormData({
         ...formData,
-        [id]: value,
+        [id]: value, // excelent use of the form id as the key! 👍 You can also use event.target.name
       });
     }
   }

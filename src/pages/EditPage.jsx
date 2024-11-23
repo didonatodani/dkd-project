@@ -4,6 +4,7 @@ import { notify } from "../utils/toastUtils";
 import supabase from "../supabase/config";
 import "./FormStyling.css";
 
+// well done adding this constant for the initial form data! 👍
 const initialFormData = {
   title: "",
   genre: [],
@@ -23,11 +24,11 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
   const [formData, setFormData] = useState(initialFormData);
 
   const handleOnChange = (e) => {
-    const { type, value, name, checked } = e.target;
+    const { type, value, name, checked } = e.target; // good destructuring!  👍
 
     if (name === "watched" && type === "checkbox") {
       setFormData((prevFormData) => ({
-        ...prevFormData,
+        ...prevFormData, // good use of spread operator! 👍
         watched: checked,
       }));
     } else if (name === "genre" && type === "checkbox") {
@@ -36,7 +37,7 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
         genre: checked
           ? [...(prevFormData.genre || []), value]
           : (prevFormData.genre || []).filter((genre) => genre !== value),
-      }));
+      })); // this part is complex, please make sure you understand it, otherwise I suggest you to use a simpler approach
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -129,6 +130,11 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
                   value={formData.rotten_tomatoes || ""}
                   onChange={handleOnChange}
                 />
+                {/*
+                    Since the initial form data has a value of 0 for rotten_tomatoes and the other fields,
+                    this || "" is not necessary. We don't need to handle initial values here
+                    if we already have a default value in the initial form data. 
+                */}
               </label>
 
               <label htmlFor="audience_rating">

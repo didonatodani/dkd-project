@@ -18,7 +18,7 @@ function App() {
 
   async function getMovies() {
     try {
-      let response = await supabase
+      let response = await supabase // well handled with try/catch! 👍
         .from("moviesdb") //name of the table in superbase
         .select("*"); //we want to import all table entries
       setMoviesArray(response.data);
@@ -30,8 +30,8 @@ function App() {
   const navigate = useNavigate();
 
   function changesDiscarded() {
-    navigate(-1);
-    alert("Changes discarded");
+    navigate(-1); // we haven't seen this in class, but it's a way to go back to the previous page
+    alert("Changes discarded"); // we could use a toast here instead of an alert
   }
 
   return (
@@ -82,7 +82,7 @@ function App() {
             }
           />
           <Route
-            path="/movie/:id/editmovie"
+            path="/movie/:id/editmovie" // to name it /editmovie is a bit redundant, since we are already in the movie
             element={
               <EditPage
                 moviesArray={moviesArray}
