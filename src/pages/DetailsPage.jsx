@@ -15,10 +15,10 @@ function DetailsPage({ moviesArray, setMoviesArray }) {
     if (!movie) {
       navigate("*");
     }
-  }, [movie, navigate]);
+  }, [movie, navigate]); // try to understand why we need to add navigate here and make sure you understand the useEffect hook
 
   if (!movie) {
-    return null;
+    return null; // what does this do?
   }
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -37,10 +37,10 @@ function DetailsPage({ moviesArray, setMoviesArray }) {
         prevMovies.filter((movie) => movie._id !== id)
       );
 
-      alert("Item deleted!");
+      alert("Item deleted!"); // we could use a toast here instead of an alert
       hidePopup();
       notify("Movie deleted successfully!", { type: "success" });
-      navigate("/");
+      navigate("/"); // here is where the navigate is useful
     } catch (err) {
       console.error("There's been an error deleting an item:", err);
     }

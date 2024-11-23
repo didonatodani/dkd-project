@@ -1,6 +1,7 @@
 import "./DeletePopup.css";
 
 function DeletePopup({ movie, deleteItem, hidePopup }) {
+  // this component is very well organized, the code is easy to read and understand 👍
   return (
     <div>
       <div className="popup-overlay">
