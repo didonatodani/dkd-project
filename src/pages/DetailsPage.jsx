@@ -79,7 +79,7 @@ function DetailsPage({ moviesArray, setMoviesArray }) {
             <div className="quick-details">
               <h4>{movie.watched ? "✅ Watched" : "🙈 Unwatched"}</h4>
               <h4>🎭 Genre: {formattedGenre}</h4>
-              <h4>🍅 Rotton Tomatoes: {movie.rotten_tomatoes}%</h4>
+              <h4>🍅 Rotten Tomatoes: {movie.rotten_tomatoes}%</h4>
               <h4>⭐️ Audience Rating: {movie.audience_rating}%</h4>
             </div>
 

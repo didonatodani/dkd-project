@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { notify } from "../utils/toastUtils";
 import supabase from "../supabase/config";
-import "./FormStyling.css"
+import "./FormStyling.css";
 
 const initialFormData = {
   title: "",
@@ -25,13 +25,43 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
   const handleOnChange = (e) => {
     const { type, value, name, checked } = e.target;
 
-    if (type === "checkbox" && name === "genre") {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        genre: checked
-          ? [...(prevFormData.genre || []), value]
-          : (prevFormData.genre || []).filter((genre) => genre !== value),
-      }));
+    //   if (type === "checkbox") {
+    //     setFormData((prevFormData) => ({
+    //       ...prevFormData,
+    //       [name]: checked, // Use the `checked` value for checkboxes
+    //     }));
+
+    //   }
+
+    //   if (type === "checkbox" && name === "genre") {
+    //     setFormData((prevFormData) => ({
+    //       ...prevFormData,
+    //       genre: checked
+    //         ? [...(prevFormData.genre || []), value]
+    //         : (prevFormData.genre || []).filter((genre) => genre !== value),
+    //     }));
+    //   } else {
+    //     setFormData((prevFormData) => ({
+    //       ...prevFormData,
+    //       [name]: value,
+    //     }));
+    //   }
+    // };
+
+    if (type === "checkbox") {
+      if (name === "genre") {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          genre: checked
+            ? [...(prevFormData.genre || []), value]
+            : (prevFormData.genre || []).filter((genre) => genre !== value),
+        }));
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: checked, // Use the `checked` value for checkboxes
+        }));
+      }
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -52,7 +82,7 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
       console.error("Error updating movie:", error);
     } else if (data && data.length > 0) {
       notify("Movie updated successfully!", { type: "success" });
-      await getMovies ()
+      await getMovies();
       navigate(`/movie/${id}`);
     } else {
       console.error("No data returned from update operation.");
@@ -101,7 +131,7 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
               <input
                 type="checkbox"
                 name="watched"
-                value={formData.watched || ""}
+                checked={formData.watched}
                 onChange={handleOnChange}
               />
             </label>
@@ -171,7 +201,6 @@ function EditPage({ moviesArray, changesDiscarded, getMovies }) {
               value={formData.image || ""}
               onChange={handleOnChange}
             />
-
           </form>
         </div>
         <div className="edit-right-side-content">
